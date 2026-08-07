@@ -1,0 +1,18 @@
+{
+  "name": "smart-krishi-share",
+  "version": "1.0.0",
+  "description": "Smart Krishi Share - Node.js backend for agricultural marketplace",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "mongoose": "^8.5.2"
+  }
+}
