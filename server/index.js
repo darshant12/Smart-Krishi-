@@ -53,10 +53,6 @@ mongoose
       console.log('🔧 Seeded default admin user (admin@example.com / admin123)');
     }
   })
-    console.log('✅ MongoDB Atlas connected successfully');
-    console.log(`   Database: ${mongoose.connection.name}`);
-    console.log(`   Host:     ${mongoose.connection.host}`);
-  })
   .catch((err) => {
     // Log but don't exit — API routes like /api/mandi don't need MongoDB
     console.error('❌ MongoDB connection error:', err.message);
