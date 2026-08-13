@@ -58,8 +58,17 @@ export default function FarmerEquipment() {
         </div>
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-          {filteredEquipment.map((item) => (
+          {filteredEquipment.map((item) => {
+            const imageSrc = item.photoUrl && item.photoUrl.startsWith('/uploads')
+              ? `http://localhost:5001${item.photoUrl}`
+              : item.photoUrl;
+            return (
             <div key={item.id} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+              {imageSrc ? (
+                <img src={imageSrc} alt={item.name} className="mb-4 h-48 w-full rounded-2xl object-cover border border-slate-100" />
+              ) : (
+                <div className="mb-4 h-48 w-full rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 text-sm">No photo</div>
+              )}
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <h2 className="text-xl font-semibold">{item.name}</h2>
@@ -81,7 +90,8 @@ export default function FarmerEquipment() {
                 View details
               </button>
             </div>
-          ))}
+            );
+          })}
           {filteredEquipment.length === 0 && (
             <div className="rounded-3xl border border-slate-200 bg-white p-6 text-center text-slate-600">
               No equipment matches your search.
@@ -108,7 +118,7 @@ export default function FarmerEquipment() {
               {selectedItem.photoUrl && (
                 <div className="mt-6 overflow-hidden rounded-3xl border border-slate-200">
                   <img
-                    src={selectedItem.photoUrl.startsWith('/uploads') ? `http://localhost:5000${selectedItem.photoUrl}` : selectedItem.photoUrl}
+                    src={selectedItem.photoUrl.startsWith('/uploads') ? `http://localhost:5001${selectedItem.photoUrl}` : selectedItem.photoUrl}
                     alt={selectedItem.name}
                     className="h-72 w-full object-cover"
                   />

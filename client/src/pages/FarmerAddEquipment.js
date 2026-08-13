@@ -32,31 +32,38 @@ export default function FarmerAddEquipment() {
     [selectedType]
   );
 
-  const handleSubmit = (event) => {
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setError('');
     if (!name.trim() || !rate.trim() || !contact.trim() || !location.trim()) {
-      setSuccess('Please provide name, hourly rate, contact number, and location.');
+      setError('Please provide name, hourly rate, contact number, and location.');
       return;
     }
 
-    addEquipment({
-      name: name.trim(),
-      type: selectedType,
-      rate: rate.trim(),
-      contact: contact.trim(),
-      location: location.trim(),
-      description: description.trim() || `A ${selectedType.toLowerCase()} available for rent.`,
-      photoFile,
-    });
+    try {
+      await addEquipment({
+        name: name.trim(),
+        type: selectedType,
+        rate: rate.trim(),
+        contact: contact.trim(),
+        location: location.trim(),
+        description: description.trim() || `A ${selectedType.toLowerCase()} available for rent.`,
+        photoFile,
+      });
 
-    setSuccess(`Successfully added ${name.trim()} to your equipment list.`);
-    setName('');
-    setRate('');
-    setContact('');
-    setLocation('');
-    setDescription('');
-    setPhotoFile(null);
-    setPhotoPreview('');
+      setSuccess(`Successfully added ${name.trim()} to your equipment list.`);
+      setName('');
+      setRate('');
+      setContact('');
+      setLocation('');
+      setDescription('');
+      setPhotoFile(null);
+      setPhotoPreview('');
+    } catch (err) {
+      setError(err.message || 'Failed to add equipment. Please try again.');
+    }
   };
 
   return (
@@ -168,6 +175,7 @@ export default function FarmerAddEquipment() {
                 Add Equipment
               </button>
               {success && <p className="text-sm text-emerald-700">{success}</p>}
+              {error && <p className="text-sm text-red-600">{error}</p>}
             </form>
           </div>
 

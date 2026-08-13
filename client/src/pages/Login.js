@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { useAuth } from '../context/AuthContext';
 
@@ -51,36 +51,44 @@ export default function Login() {
 
   return (
     <Layout>
-      <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100"
-        <h1 className="text-4xl font-extrabold text-gray-800 mb-6 text-center">Login</h1>
-        <form onSubmit={handleSubmit} className="mt-6 space-y-5">
-          {error && <p className="rounded-md bg-red-100 px-4 py-2 text-sm text-red-800 mb-4 text-center">{error}</p>}
-          <label className="block">
-            <span className="text-slate-700">Email</span>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="mt-2 w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-              placeholder="you@example.com"
-              required
-            />
-          </label>
-          <label className="block">
-            <span className="text-slate-700">Password</span>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mt-2 w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-              placeholder="Password"
-              required
-            />
-          </label>
-          <button type="submit" className="w-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium py-3 hover:from-indigo-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
-            Login
-          </button>
-        </form>
+      <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100">
+        <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
+          <h1 className="text-4xl font-extrabold text-gray-800 mb-6 text-center">Login</h1>
+          <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+            {error && <p className="rounded-md bg-red-100 px-4 py-2 text-sm text-red-800 mb-4 text-center">{error}</p>}
+            <label className="block">
+              <span className="text-slate-700">Email</span>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="mt-2 w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                placeholder="you@example.com"
+                required
+              />
+            </label>
+            <label className="block">
+              <span className="text-slate-700">Password</span>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="mt-2 w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                placeholder="Password"
+                required
+              />
+            </label>
+            <button type="submit" className="w-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium py-3 hover:from-indigo-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
+              Login
+            </button>
+          </form>
+          <p className="mt-5 text-center text-sm text-slate-500">
+            Don't have an account?{' '}
+            <Link to="/register" className="font-semibold text-indigo-600 hover:underline">
+              Register
+            </Link>
+          </p>
+        </div>
       </section>
     </Layout>
   );

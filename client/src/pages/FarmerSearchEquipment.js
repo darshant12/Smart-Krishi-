@@ -64,7 +64,7 @@ export default function FarmerSearchEquipment() {
         <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {filteredListings.length > 0 ? (
             filteredListings.map((item) => {
-              const imageSrc = item.photoUrl && item.photoUrl.startsWith('/uploads') ? `http://localhost:5000${item.photoUrl}` : item.photoUrl;
+              const imageSrc = item.photoUrl && item.photoUrl.startsWith('/uploads') ? `http://localhost:5001${item.photoUrl}` : item.photoUrl;
               return (
                 <div key={item.id} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
                   {imageSrc ? (
