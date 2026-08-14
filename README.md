@@ -42,6 +42,9 @@
 
 ---
 
+OPEN the App https://smart-krishi-3-djhd.onrender.com
+
+
 ## 📁 Project Structure
 
 ```
