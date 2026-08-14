@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import DashboardLayout from '../components/DashboardLayout';
 import { Link, useParams } from 'react-router-dom';
 import { useEquipment } from '../context/EquipmentContext';
+import API_BASE from '../config';
 
 export default function FarmerEquipment() {
   const { slotId } = useParams();
@@ -60,7 +61,7 @@ export default function FarmerEquipment() {
         <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {filteredEquipment.map((item) => {
             const imageSrc = item.photoUrl && item.photoUrl.startsWith('/uploads')
-              ? `http://localhost:5001${item.photoUrl}`
+              ? `${API_BASE}${item.photoUrl}`
               : item.photoUrl;
             return (
             <div key={item.id} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -118,7 +119,7 @@ export default function FarmerEquipment() {
               {selectedItem.photoUrl && (
                 <div className="mt-6 overflow-hidden rounded-3xl border border-slate-200">
                   <img
-                    src={selectedItem.photoUrl.startsWith('/uploads') ? `http://localhost:5001${selectedItem.photoUrl}` : selectedItem.photoUrl}
+                    src={selectedItem.photoUrl.startsWith('/uploads') ? `${API_BASE}${selectedItem.photoUrl}` : selectedItem.photoUrl}
                     alt={selectedItem.name}
                     className="h-72 w-full object-cover"
                   />

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react';
 import { useAuth } from './AuthContext';
+import API_BASE from '../config';
 
 const EquipmentContext = createContext(null);
 const initialEquipment = [];
@@ -39,7 +40,7 @@ export function EquipmentProvider({ children }) {
 
   const fetchEquipment = async () => {
     try {
-      const response = await fetch('/api/equipment', {
+      const response = await fetch(`${API_BASE}/api/equipment`, {
         headers: { 'Content-Type': 'application/json', ...authHeaders },
       });
       if (!response.ok) {
@@ -56,7 +57,7 @@ export function EquipmentProvider({ children }) {
   const fetchBookingRequests = async () => {
     if (!token) return;
     try {
-      const response = await fetch('/api/bookings/requester', {
+      const response = await fetch(`${API_BASE}/api/bookings/requester`, {
         headers: { 'Content-Type': 'application/json', ...authHeaders },
       });
       if (!response.ok) {
@@ -73,7 +74,7 @@ export function EquipmentProvider({ children }) {
   const fetchOwnerBookingRequests = async () => {
     if (!token) return;
     try {
-      const response = await fetch('/api/bookings/owner', {
+      const response = await fetch(`${API_BASE}/api/bookings/owner`, {
         headers: { 'Content-Type': 'application/json', ...authHeaders },
       });
       if (!response.ok) {
@@ -113,7 +114,7 @@ export function EquipmentProvider({ children }) {
           })()
         : JSON.stringify(newItem);
 
-      const response = await fetch('/api/equipment', {
+      const response = await fetch(`${API_BASE}/api/equipment`, {
         method: 'POST',
         headers,
         body,
@@ -133,7 +134,7 @@ export function EquipmentProvider({ children }) {
 
   const addBookingRequest = async ({ equipmentId, hours, requesterContact, requesterEmail, bookingLocation }) => {
     try {
-      const response = await fetch('/api/bookings', {
+      const response = await fetch(`${API_BASE}/api/bookings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...authHeaders },
         body: JSON.stringify({ equipmentId, hours, requesterContact, requesterEmail, bookingLocation }),
@@ -156,7 +157,7 @@ export function EquipmentProvider({ children }) {
   const updateBookingRequestStatus = async (id, status) => {
     if (!token) return;
     try {
-      const response = await fetch(`/api/bookings/${id}/status`, {
+      const response = await fetch(`${API_BASE}/api/bookings/${id}/status`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', ...authHeaders },
         body: JSON.stringify({ status }),

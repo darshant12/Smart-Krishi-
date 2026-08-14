@@ -9,7 +9,18 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 console.log('Loaded env from', path.resolve(__dirname, '.env'));
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (curl, Postman, server-to-server)
+    if (!origin) return callback(null, true);
+    // Allow any onrender.com subdomain and localhost
+    if (origin.match(/^https?:\/\/(.*\.onrender\.com|localhost(:\d+)?)$/)) {
+      return callback(null, true);
+    }
+    callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+}));
 app.use(express.json());
 
 const uploadsDir = path.join(__dirname, 'uploads');

@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from 'react';
 import DashboardLayout from '../components/DashboardLayout';
 import { Link } from 'react-router-dom';
+import API_BASE from '../config';
 
 // Local browse items
 const localItems = [
@@ -46,7 +47,7 @@ export default function FarmerMarketplace() {
       if (mandiCommodity.trim()) params.set('commodity', mandiCommodity.trim());
       if (mandiState !== 'All States') params.set('state', mandiState);
 
-      const res = await fetch(`/api/mandi?${params.toString()}`);
+      const res = await fetch(`${API_BASE}/api/mandi?${params.toString()}`);
       if (!res.ok) throw new Error(`Server returned ${res.status}`);
       const json = await res.json();
       setMandiData(json.records || []);
