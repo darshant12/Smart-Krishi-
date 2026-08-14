@@ -128,7 +128,7 @@ npm install
 npm start
 ```
 
-The React app starts on **http://localhost:3000**
+The app starts on [**http://localhost:3000**](https://smart-krishi-3-djhd.onrender.com)
 
 ---
 
